@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10233b">
+  <meta name="description" content="정보관리기술사 개념을 검색하고 관련 개념의 연결을 탐색합니다.">
+  <title>정보관리기술사 개념 그래프</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js"
+          integrity="sha384-Ux6phic9PEHJ38YtrijhkzyJ8yQlH8i/+buBR8s3mAZOJrP1gwyvAcIYl3GWtpX1"
+          crossorigin="anonymous" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><span class="brand-mark">PEIM</span><span class="brand-divider"></span><span>개념 탐색 지도</span></div>
+    <h1>정보관리기술사 개념 그래프</h1>
+    <p>하나의 개념에서 출발해 연결된 지식을 따라가 보세요.</p>
+    <div class="summary" id="summary" aria-live="polite">개념 그래프를 불러오는 중입니다.</div>
+  </header>
+
+  <main class="workspace">
+    <section class="search-pane" aria-labelledby="search-title">
+      <div class="pane-heading">
+        <span class="step">01 / 찾기</span>
+        <h2 id="search-title">개념 찾기</h2>
+      </div>
+      <label for="search">한글·영문·약어로 검색</label>
+      <input id="search" type="search" placeholder="예: 데이터 거버넌스, TLS, DevOps" autocomplete="off">
+      <p class="hint" id="search-hint">시작할 개념을 선택하세요.</p>
+      <ul id="results" class="result-list" aria-label="개념 검색 결과"></ul>
+      <p class="privacy-note">이 페이지에는 개념 관계만 공개합니다. 아래 위키 원문 링크는 PEIM 저장소 접근 권한이 있어야 열립니다.</p>
+    </section>
+
+    <section class="graph-pane" aria-labelledby="graph-title">
+      <div class="graph-toolbar">
+        <div>
+          <span class="step">02 / 연결 보기</span>
+          <h2 id="graph-title">관련 개념</h2>
+          <p id="graph-caption" aria-live="polite">개념을 선택하면 주변 연결을 표시합니다.</p>
+        </div>
+        <fieldset class="depth-control">
+          <legend>표시 범위</legend>
+          <label><input type="radio" name="depth" value="1" checked> 1단계</label>
+          <label><input type="radio" name="depth" value="2"> 2단계</label>
+        </fieldset>
+      </div>
+      <div id="graph" role="img" aria-label="선택한 개념의 연결 그래프"></div>
+      <div class="graph-footnote">
+        <span><i class="swatch swatch-focus"></i> 선택 개념</span>
+        <span><i class="swatch swatch-concept"></i> 관련 개념</span>
+        <span><i class="swatch swatch-document"></i> 개념 문서</span>
+        <span>화살표는 기록된 관계 방향입니다.</span>
+      </div>
+    </section>
+
+    <section class="detail-pane" aria-labelledby="detail-title">
+      <div class="pane-heading">
+        <span class="step">03 / 맥락 읽기</span>
+        <h2 id="detail-title">선택한 개념</h2>
+      </div>
+      <div id="details" aria-live="polite"><p>왼쪽에서 개념을 선택하세요.</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>관계는 위키 문서에서 추출한 탐색 단서입니다. 사실 검증, 출제 빈도, 선수 학습 순서, 개인 숙련도를 뜻하지 않습니다.</p>
+    <p id="built-at"></p>
+  </footer>
+</body>
+</html>
